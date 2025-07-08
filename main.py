@@ -1,6 +1,7 @@
 # Load custom functions from another file
 from helper_functions import *
 
+
 # The main function
 def main():
     # The path to the left handed file
