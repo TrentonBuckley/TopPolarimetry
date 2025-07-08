@@ -19,6 +19,26 @@ def load_data(path):
     # The function returns relevent variables
     return E, px, py, pz, pid
 
+def select_top(E, px, py, pz, pid):
+    mask = pid==6
+    return E[mask], px[mask], py[mask], pz[mask]
+    
+def select_down_type(E, px, py, pz, pid):
+    mask1 = pid==1
+    mask2 = pid==3
+    mask = mask1 | mask2
+    return E[mask], px[mask], py[mask], pz[mask]
+
+# Function that takes the input data and plots simple hist
+def plot_hists(title, var):
+    # "Flatten" the data
+    var = ak.ravel(var)
+    # Plot a histogram
+    plt.title(title)
+    plt.hist(var, bins=50)
+    # Save the figure
+    plt.savefig(title+".png")
+    
 # Function that takes the input data and plots simple hist
 def plot_hists(E, px, py, pz, pid):
     # "Flatten" the data
@@ -59,13 +79,21 @@ def initialize_vectors(E, px, py, pz, pid):
         for particle in range(num_particles):
             #print(px[event][particle])
 
-            ### TO DO: Write an if statement to check if the particle is a top or down-type quark based on PID
-
-            # For now store all the particles into a vector object
+            # Store all the particles into a vector object
             vector_list.append(vector.obj(px=px[event][particle], py=py[event][particle], pz=pz[event][particle], E=E[event][particle]))
 
     # Return list of vectors after for loop is finished
     return vector_list
+
+
+def plot_mass_from_vectors(title, vectors):
+    m_list = []
+    for vec in vectors:
+        m_list.append(vec.m)
+    plt.title(title)
+    plt.hist(ak.ravel(m_list),bins=30)
+    plt.savefig(title+".png")
+    plt.close()
 
 def plot_pT_from_vectors(vectors):
     pT_list = []
