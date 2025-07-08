@@ -31,6 +31,7 @@ def select_down_type(E, px, py, pz, pid):
 
 # Function that takes the input data and plots simple hist
 def plot_hists(title, var):
+    plt.figure()
     # "Flatten" the data
     var = ak.ravel(var)
     # Plot a histogram
@@ -39,17 +40,6 @@ def plot_hists(title, var):
     # Save the figure
     plt.savefig(title+".png")
     
-# Function that takes the input data and plots simple hist
-def plot_hists(E, px, py, pz, pid):
-    # "Flatten" the data
-    E = ak.ravel(E)
-    # Plot a histogram
-    plt.title("particle Energy")
-    plt.hist(E)
-    # Save the figure
-    plt.savefig("E.png")
-    plt.close()
-
 def initialize_vectors(E, px, py, pz, pid):
 
     # Initialize empty list of vectors
@@ -90,6 +80,7 @@ def plot_mass_from_vectors(title, vectors):
     m_list = []
     for vec in vectors:
         m_list.append(vec.m)
+    plt.figure()
     plt.title(title)
     plt.hist(ak.ravel(m_list),bins=30)
     plt.savefig(title+".png")
@@ -99,6 +90,7 @@ def plot_pT_from_vectors(vectors):
     pT_list = []
     for vec in vectors:
         pT_list.append(vec.pt)
+    plt.figure()
     plt.title("particle pT")
     plt.hist(ak.ravel(pT_list))
     plt.savefig("pT.png")
