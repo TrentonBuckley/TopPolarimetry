@@ -39,6 +39,7 @@ def plot_hists(title, var):
     plt.hist(var, bins=50)
     # Save the figure
     plt.savefig(title+".png")
+    plt.close()
     
 def initialize_vectors(E, px, py, pz, pid):
 
