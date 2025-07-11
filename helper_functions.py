@@ -15,18 +15,20 @@ def load_data(path):
         py = f['py'].array()
         pz = f['pz'].array()
         pid = f['pid'].array()
+        status = f['status'].array()
 
     # The function returns relevent variables
-    return E, px, py, pz, pid
+    return E, px, py, pz, pid, status
 
 def select_top(E, px, py, pz, pid):
     mask = pid==6
     return E[mask], px[mask], py[mask], pz[mask]
     
-def select_down_type(E, px, py, pz, pid):
-    mask1 = pid==1
-    mask2 = pid==3
-    mask = mask1 | mask2
+def select_down_type(E, px, py, pz, pid, status):
+    mask1 = abs(pid)==1
+    mask2 = abs(pid)==3
+    mask3 = status>0
+    mask = (mask1 | mask2) & status
     return E[mask], px[mask], py[mask], pz[mask]
 
 # Function that takes the input data and plots simple hist
