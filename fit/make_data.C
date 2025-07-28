@@ -25,11 +25,13 @@ void make_data()
     if (i>(threshold*n_events)) {
       observation=hL_true->GetRandom();
       hd->Fill(observation);
+      observation=hL_true->GetRandom();
       hL->Fill(observation);
     }
     else {
       observation=hR_true->GetRandom();
       hd->Fill(observation);
+      observation=hR_true->GetRandom();
       hR->Fill(observation);
     }
   }
