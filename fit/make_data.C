@@ -15,6 +15,7 @@ void make_data()
   for (int i = 1; i<=n; ++i) hR_true->SetBinContent(i,(i-0.5)/n);
   for (int i = 1; i<=n; ++i) hL_true->SetBinContent(i,1.-(i-0.5)/n);
 
+
   int n_events = 1800;
   TH1* hd = new TH1F("hd","",n,-1.,1.);
   TH1* hR = new TH1F("hR","",n,-1.,1.);
