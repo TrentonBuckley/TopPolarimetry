@@ -15,7 +15,8 @@ void make_data()
   for (int i = 1; i<=n; ++i) hR_true->SetBinContent(i,(i-0.5)/n);
   for (int i = 1; i<=n; ++i) hL_true->SetBinContent(i,1.-(i-0.5)/n);
 
-  int n_events = 100000;
+
+  int n_events = 1800;
   TH1* hd = new TH1F("hd","",n,-1.,1.);
   TH1* hR = new TH1F("hR","",n,-1.,1.);
   TH1* hL = new TH1F("hL","",n,-1.,1.);
@@ -25,11 +26,13 @@ void make_data()
     if (i>(threshold*n_events)) {
       observation=hL_true->GetRandom();
       hd->Fill(observation);
+      observation=hL_true->GetRandom();
       hL->Fill(observation);
     }
     else {
       observation=hR_true->GetRandom();
       hd->Fill(observation);
+      observation=hR_true->GetRandom();
       hR->Fill(observation);
     }
   }
